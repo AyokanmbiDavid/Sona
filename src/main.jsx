@@ -3,6 +3,7 @@ import './index.css'
 import App from './App.jsx'
 import ContextProvider from './components/ContextProvider.jsx';
 import { BrowserRouter } from 'react-router-dom';
+import 'flowbite'
 
 createRoot(document.getElementById('root')).render(
   <ContextProvider>

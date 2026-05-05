@@ -1,13 +1,19 @@
-import React, { useState,useContext} from 'react'
-import { FastForward, Home, Key, Menu, User, Loader2Icon} from 'lucide-react'
+import React, { useState,useContext, useEffect} from 'react'
+import { FastForward, Home, Key, Menu, User, Loader2Icon, User2Icon} from 'lucide-react'
 import {motion} from "framer-motion"
 import { Link, useLocation } from 'react-router-dom'
 import {all_provider} from './ContextProvider.jsx'
 
 const Navbar = () => {
   const { refresh,Notify} = useContext(all_provider);
+  const [islogin,setislogin] = useState(localStorage.getItem('sona_log') || false)
   const [loading, setloading] = useState(false)
-  const [sidebar,setsidebar]=useState(false)
+  const [dropdown,setdropdown]=useState(false)
+
+  useEffect(()=>{
+    
+  },[])
+
   const menus = [
     {name:"Dashboard", icon:<Home className='text-blue-800' size={16}/>,link:'/'},
     {name:"Complain", icon:<User className='text-blue-800' size={16}/>, link:'/complain'},
@@ -23,72 +29,44 @@ const Navbar = () => {
   
   return (
     <>
-      <div className="w-full fixed top-0 left-0 z-60 p-3 bg-gray-50/90 border border-gray-200 flex justify-between items-center">
-          <div className="flex justify-center gap-3 items-center">
-                {/* menu */}
-              <div 
-              onClick={() => setsidebar(!sidebar)}
-              className="p-2 rounded-xl bg-gray-100 cursor-pointer">
-                <Menu size={16} 
-                className='text-gray-700/70'/>
-              </div>
-
-              <h1 className="font-semibold text-md flex flex-col">
-                Teens Attendance
-                <p className='text-xs text-gray-500 font-normal p-2 rounded-4xl bg-gray-200'>RCCG Miracle Center</p>
-              </h1>
-          </div>
-
-          <div className="flex gap-3 items-center">
-            {/* refresh button */}
-            <button
-            onClick={() => refreshpage()}
-            className="bg-gray-200/80 p-2 flex justify-center gap-3 items-center text-gray-600 rounded-4xl text-xs cursor-pointer" >
-              <span className="max-md:hidden">Refresh Page</span>
-             <Loader2Icon className={`${loading && 'animate-spin'}`}
-             size={17}/>
-             
-            </button>
-            {/* home button */}
-            <Link to={'/'}
-            className='p-3 hover:bg-green-100/90 rounded-4xl'>
-              <Home className='text-green-700' size={13} />
-              
-            </Link>
-            {/* Admin login */}
-          <Link to={'./admin'} className="bg-blue-100 hover:bg-blue-200/80 rounded-4xl text-blue-800 font-bold p-3 px-3 text-xs flex justify-between items-center gap-3 cursor-pointer  duration-200">
-            <span  className='max-md:hidden'>Admin Login</span>
-            <Key size={16} className='rotate-[40deg]'/>
-          </Link>
-          </div>
-      </div>
-
-      {/* sidebar */}
-      {sidebar && 
-      <div 
-      onClick={() => setsidebar(false)}
-      className="fixed w-full h-screen z-50 top-4 bg-gray-200/60 left-0">
-          <motion.div 
-          initial={{x:-100}}
-          animate={{x:0}}
-          className="p-2 pl-4 border-r border-gray-200 bg-white h-screen w-[250px] mt-10">
-            <span className="text-sm font-semibold text-gray-500">MENU</span>
-
-            {/* menus */}
-            <div className="h-screen w-full flex flex-col mt-2">
-             {menus.map((item,i) => (
-              <>
-                 <Link to={item.link}
-                 onClick={() => setsidebar(false)}
-                  className={`w-full flex justify-start p-2 py-3 rounded-md ${location == item.link && 'bg-blue-200' } items-center gap-3`}>
-                {item.icon}
-                <span className={`${location == item.link && 'text-blue-600'} text-xs font-semibold`}>{item.name}</span>
-              </Link>
-              </>
-             ))}
+      <div className="w-full p-3 flex justify-between items-center">
+         <div className="xl:hidden w-20 -ml-5">
+                <img src="/public/Sona_Icon.png" alt="sona_icon" className='h-10 w-10 rounded-md' />
             </div>
-          </motion.div>
-      </div>}
+        <div className="w-full flex items-center gap-3">
+          <input type="search" placeholder='Search here'
+          className='w-full p-3 bg-gray-100 border border-gray-200 rounded-xl text-sm' />
+        </div>
+
+        <div className="ml-4 relative">
+         {islogin ? 
+         <span className="p-3 cursor-pointer rounded-full" 
+         onClick={() => setdropdown(prev => !prev)}
+         id='dropdownToggle' data-dropdown-trigger="click" data-dropdown-toggle="dropdownMenu">
+           <User2Icon/>
+         </span> :
+         <div className='flex justify-center text-xs items-center gap-2 bg-linear-to-br from-blue-500 to-green-500 rounded-full p-3 text-white'>
+            <User2Icon size={17}/> Login
+          </div>}
+
+         {dropdown && <div id='dropdownMenu' className="absolute top-20 flex bg-white flex-col items-center right-0 rounded-3xl g-white border border-gray-200">
+          <div className="w-full p-3 border-b border-gray-200 flex flex-col justify-center items-center gap-3">
+            <span className="bg-green-100 p-3 rounded-full">
+              <User2Icon />
+            </span>
+            <h1 className="text-md">Ayokanmbi</h1>
+          </div>
+          <div className="flex gap-3 w-full p-2">
+            <button className="bg-red-500 w-full cursor-pointer p-3 rounded-xl text-white text-xs">
+              Logout
+            </button>
+            <button className="bg-blue-100 w-full cursor-pointer p-3 rounded-xl text-blue-700 font-bold text-xs">
+             Admin
+            </button>
+          </div>
+         </div>}
+        </div>
+      </div>
     </>
   )
 }

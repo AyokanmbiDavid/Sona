@@ -2,6 +2,7 @@ import React from "react"
 import Navbar from "./components/Navbar"
 import Sidebarr from "./components/Sidebarr"
 import HomePage from "./pages/HomePage"
+import LoginPage from "./pages/LoginPage"
 import { Routes, Route} from "react-router-dom"
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
           <Navbar/>
           <Routes>
             <Route path='/' element={<HomePage/>} />
+            <Route path='/login' element={<LoginPage/>} />
         </Routes>
         </div>
       </div>

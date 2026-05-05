@@ -37,7 +37,7 @@ const Sidebarr = () => {
             </div>
       </div>
 
-      <div className=" w-full fixed p-2 bottom-0 flex items-center justify-around xl:hidden">
+      <div className=" w-full bg-white fixed p-2 bottom-0 flex items-center justify-around xl:hidden">
 
                 {navs.map((item, e) => (
                     <>

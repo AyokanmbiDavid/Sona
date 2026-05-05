@@ -45,9 +45,9 @@ const Navbar = () => {
          id='dropdownToggle' data-dropdown-trigger="click" data-dropdown-toggle="dropdownMenu">
            <User2Icon/>
          </span> :
-         <div className='flex justify-center text-xs items-center gap-2 bg-linear-to-br from-blue-500 to-green-500 rounded-full p-3 text-white'>
+         <Link to={'/login'} className='flex justify-center text-xs items-center gap-2 bg-linear-to-br from-blue-500 to-green-500 rounded-full p-3 text-white'>
             <User2Icon size={17}/> Login
-          </div>}
+          </Link>}
 
          {dropdown && <div id='dropdownMenu' className="absolute top-20 flex bg-white flex-col items-center right-0 rounded-3xl g-white border border-gray-200">
           <div className="w-full p-3 border-b border-gray-200 flex flex-col justify-center items-center gap-3">

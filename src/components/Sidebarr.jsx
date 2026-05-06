@@ -1,21 +1,36 @@
-import { Bell, ChartBarIcon, Home, Sidebar } from 'lucide-react'
-import React, { useState } from 'react'
+import { Bell, ChartBarIcon, Home, Moon, Sidebar, SunIcon } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const Sidebarr = () => {
     const [ishovered,setishovered] = useState()
+    const [theme,settheme] = useState(localStorage.getItem('theme') || 'light')
     const location = useLocation().pathname
     const navs =[
-        {name:'Home',icon:<Home/>,path:'/'},
-        {name:'Your Page',icon:<Sidebar/>,path:'/profile'},
-        {name:'Messages',icon:<ChartBarIcon/>,path:'/messages'},
-        {name:'Updates',icon:<Bell/>,path:'/updated'},
+        {name:'Home',icon:<Home size={13}/>,path:'/'},
+        {name:'Your Page',icon:<Sidebar size={13}/>,path:'/profile'},
+        {name:'Messages',icon:<ChartBarIcon size={13}/>,path:'/messages'},
+        {name:'Updates',icon:<Bell size={13}/>,path:'/updated'},
     ]
+
+    useEffect(() => {
+        localStorage.setItem('theme',theme)
+    },[theme])
+
+    const toggletheme = () => {
+        if (theme == 'light') {
+            document.documentElement.classList.add('dark');
+            settheme('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+            settheme('light')
+        }
+    }
   return (
-    <div>
-      <div className="h-full p-3 flex flex-col items-center max-md:hidden">
-            <div className="">
-                <img src="/public/Sona_Icon.png" alt="sona_icon" className='h-10 w-10 rounded-md' />
+    <div className='h-screen flex flex-col items-center justify-between '>
+      <div className=" p-1 pr-3 h-full flex flex-col items-center justify-start max-md:hidden border-r border-gray-200 dark:border-gray-800">
+            <div className=" mt-4">
+                <img src="/public/Sona_Icon.png" alt="sona_icon" className='h-7 w-7 rounded-md' />
             </div>
 
             <div className="flex flex-col mt-10 gap-10 items-center">
@@ -24,7 +39,7 @@ const Sidebarr = () => {
                         <Link to={item.path}
                         onMouseOver={() => setishovered(navs.indexOf(item))}
                         onMouseLeave={() => setishovered()}
-                        className={`relative p-3 rounded-xl cursor-pointer ${location == item.path ? 'bg-black text-white' : 'hover:bg-gray-100'}`}>
+                        className={`relative p-2 rounded-md cursor-pointer ${location == item.path ? 'bg-black dark:bg-gray-800 text-white dark:text-gray-100' : 'hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-200'}`}>
                             {item.icon}
 
                             {ishovered == navs.indexOf(item) &&
@@ -37,17 +52,23 @@ const Sidebarr = () => {
             </div>
       </div>
 
-      <div className=" w-full bg-white fixed p-2 bottom-0 flex items-center justify-around xl:hidden">
+      <div className=" w-full bg-white dark:bg-gray-800 fixed p-3 bottom-0 right-0 flex items-center justify-around xl:hidden">
 
                 {navs.map((item, e) => (
                     <>
                         <Link to={item.path}
                         onMouseLeave={() => setishovered()}
-                        className={`relative p-3 px-4 flex flex-col rounded-full cursor-pointer ${location == item.path ? 'bg-black text-white' : 'hover:bg-gray-100'} `}>
+                        className={`relative p-3 px-4 flex flex-col rounded-md cursor-pointer ${location == item.path ? 'bg-black dark:bg-gray-700 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-200'} `}>
                             {item.icon}
                         </Link>
                     </>
                 ))}
+      </div>
+
+      <div className="p-2 mb-10 rounded-full bg-gray-100 cursor-pointer max-md:hidden " onClick={() => toggletheme()}>
+        {theme == 'light' ? 
+        <Moon size={13}/> :
+        <SunIcon size={13} />}
       </div>
     </div>
   )

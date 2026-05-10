@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CloudUpload, DoorOpen, EyeClosed, EyeIcon, Info, Key, LockIcon, ShoppingCart, User } from "lucide-react";
-import { supabase } from "../lib/supabase";
 import { all_provider } from "../components/ContextProvider";
-import axios from "axios";
+import axios from "axios"
 
 const SignUpPage = () => {
     const [loading,setloading] = useState(false)

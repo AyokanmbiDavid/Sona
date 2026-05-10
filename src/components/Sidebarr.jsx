@@ -30,7 +30,7 @@ const Sidebarr = () => {
     <div className='h-screen flex flex-col items-center justify-between '>
       <div className=" p-1 pr-3 h-full flex flex-col items-center justify-start max-md:hidden border-r border-gray-200 dark:border-gray-800">
             <div className=" mt-4">
-                <img src="/public/Sona_Icon.png" alt="sona_icon" className='h-7 w-7 rounded-md' />
+                <img src="./Sona_Icon.png" alt="sona_icon" className='h-7 w-7 rounded-md' />
             </div>
 
             <div className="flex flex-col mt-10 gap-10 items-center">

@@ -83,7 +83,7 @@ const Navbar = () => {
     <>
       <div className="w-full p-3 px-0 flex justify-between items-center">
          <div className="xl:hidden w-20 -ml-5">
-                <img src="/public/Sona_Icon.png" alt="sona_icon" className='h-10 w-10 rounded-md' />
+                <img src="./Sona_Icon.png" alt="sona_icon" className='h-10 w-10 rounded-md' />
             </div>
         <div className="w-full ml-2 flex items-center gap-3">
           <input type="search" placeholder='Search here'

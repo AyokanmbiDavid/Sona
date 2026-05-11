@@ -3,24 +3,21 @@ import { Search, Users, CheckCircle, Percent, ClipboardX, Send, Loader2, Refresh
 import { all_provider } from '../components/ContextProvider';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Latest from '../components/Latest';
+
 
 const HomePage = () => {
     const [islogin,setislogin] = useState(localStorage.getItem('userlog') || false)
   
   return(
     <>
-    <div className=" h-screen">
-        {!islogin &&
-        <div> 
-          <div className="h-100 w-full flex flex-col justify-center text-center items-center p-3 rounded-md bg-red-100 dark:bg-red-700/40">
-              <AlertTriangle className='text-red-800 dark:text-red-300' size={30} />
-              <h1 className="mt-5 text-xl font-bold text-red-800 dark:text-red-300">
-                Please Login to continue 
-              </h1>
-              <p className="mt-5 text-md font-bold text-red-800 dark:text-red-300">with sona </p>
-              <Link to={'login'} className=' p-3 text-xs text-white bg-red-800/90 rounded-md' >proceed to login</Link>
-          </div>
-          </div>}
+    <div className="gap-2 max-md:flex-col overflow-y-auto">
+      <div className="w-full rounded-lg text-xs bg-green-100 dark:bg-green-800/60 dark:text-green-50 text-green-700 p-3">10%
+        <span className='font-bold mx-2'>discount</span> 
+        Exclusive for newcomers
+        </div>
+
+        <Latest />
     </div>
     </>
   )

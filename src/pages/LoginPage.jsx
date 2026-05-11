@@ -32,9 +32,8 @@ const LoginPage = () => {
           console.log('user login succeas');
           Notify('success','login successful');
 
-          if (staylogged) {
-            localStorage.setItem('userlog',JSON.stringify({email,password}))
-          }
+            localStorage.setItem('userlog',JSON.stringify({email,password,stayologged: staylogged == 'on' ? true : false}))
+
           setTimeout(() => {
             navigate('/')
           }, 2000);

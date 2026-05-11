@@ -1,5 +1,5 @@
 import React, { useState,useContext, useEffect} from 'react'
-import { FastForward, Home, Key, Menu, User, Loader2Icon, User2Icon, Moon, SunIcon, Settings, LogOut, LogIn} from 'lucide-react'
+import { FastForward, Home, Key, Menu, User, Loader2Icon, User2Icon, Moon, SunIcon, Settings, LogOut, LogIn, SearchIcon, RefreshCw} from 'lucide-react'
 import {motion} from "framer-motion"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {all_provider} from './ContextProvider.jsx'
@@ -81,16 +81,26 @@ const Navbar = () => {
   
   return (
     <>
-      <div className="w-full p-3 px-0 flex justify-between items-center">
-         <div className="xl:hidden w-20 -ml-5">
+      <div className=" sticky top-0 left-0 bg-white dark:bg-gray-900 z-20 w-full p-3 px-0 flex justify-between items-center">
+        {/* left */}
+         <div className="flex items-center justify-start">
+          <div className="xl:hidden -ml-5">
                 <img src="./Sona_Icon.png" alt="sona_icon" className='h-10 w-10 rounded-md' />
             </div>
-        <div className="w-full ml-2 flex items-center gap-3">
-          <input type="search" placeholder='Search here'
-          className='w-full p-2 bg-gray-100 border border-gray-200 dark:bg-gray-800 dark:border-gray-600 rounded-md text-xs' />
-        </div>
+          <Link to="/search" className=" flex items-center gap-3 p-2 pl-10 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-full">
+              <SearchIcon size={13}/>
+          </Link>
+         </div>
 
-        <div className="p-2 ml-5 rounded-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 cursor-pointer xl:hidden" onClick={() => toggletheme()}>
+        {/* right */}
+        <div className="flex items-center gap-2">
+          {/* refresh */}
+          <div className="bg-gray-100 dark:bg-gray-700 cursor-pointer dark:text-gray-200 p-2 rounded-lg">
+              <RefreshCw  size={13}/>
+          </div>
+
+          {/* theme toggle */}
+          <div className="p-2 ml-5 rounded-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 cursor-pointer xl:hidden" onClick={() => toggletheme()}>
         {theme == 'light' ? 
         <Moon size={13}/> :
         <SunIcon size={13} />}
@@ -127,6 +137,7 @@ const Navbar = () => {
             </button>
           </div>
          </div>}
+        </div>
         </div>
       </div>
     </>

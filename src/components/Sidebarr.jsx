@@ -1,4 +1,4 @@
-import { Bell, ChartBarIcon, Home, Moon, Sidebar, SunIcon } from 'lucide-react'
+import { Bell, ChartBarIcon, Component, Home, LucideShoppingCart, Moon, Sidebar, SunIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -8,8 +8,8 @@ const Sidebarr = () => {
     const location = useLocation().pathname
     const navs =[
         {name:'Home',icon:<Home size={13}/>,path:'/'},
-        {name:'Your Page',icon:<Sidebar size={13}/>,path:'/profile'},
-        {name:'Messages',icon:<ChartBarIcon size={13}/>,path:'/messages'},
+        {name:'Categories',icon:<Component size={13}/>,path:'/category'},
+        {name:'Messages',icon:<LucideShoppingCart size={13}/>,path:'/messages'},
         {name:'Updates',icon:<Bell size={13}/>,path:'/updated'},
     ]
 
@@ -39,11 +39,11 @@ const Sidebarr = () => {
                         <Link to={item.path}
                         onMouseOver={() => setishovered(navs.indexOf(item))}
                         onMouseLeave={() => setishovered()}
-                        className={`relative p-2 rounded-md cursor-pointer ${location == item.path ? 'bg-black dark:bg-gray-800 text-white dark:text-gray-100' : 'hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-200'}`}>
+                        className={`relative p-2 rounded-md cursor-pointer ${location == item.path ? 'bg-black dark:bg-gray-100 text-white dark:text-gray-900' : 'hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-200'}`}>
                             {item.icon}
 
                             {ishovered == navs.indexOf(item) &&
-                            <div className="absolute p-2 text-xs bg-black rounded-xl text-white -right-20 top-1">
+                            <div className="absolute p-2 text-xs z-20 bg-black rounded-xl dark:bg-gray-100 text-white dark:font-bold dark:text-gray-900 -right-25 -top-1">
                                 {item.name}
                             </div>}
                         </Link>
@@ -52,7 +52,7 @@ const Sidebarr = () => {
             </div>
       </div>
 
-      <div className=" w-full bg-white dark:bg-gray-800 fixed p-3 bottom-0 right-0 flex items-center justify-around xl:hidden">
+      <div className=" w-full bg-white dark:bg-gray-800 fixed z-20 p-3 bottom-0 right-0 flex items-center justify-around xl:hidden">
 
                 {navs.map((item, e) => (
                     <>

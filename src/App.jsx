@@ -8,6 +8,8 @@ import SignUpPage from "./pages/SignUpPage"
 import { all_provider } from "./components/ContextProvider"
 import Notify from './components/Notify.jsx'
 import ProctectedRoute from "./components/ProctectedRoute.jsx"
+import ProfilePage from "./pages/ProfilePage.jsx"
+import Search from "./pages/Search.jsx"
 const App = () => {
     const {notifystatus} = useContext(all_provider)
   useEffect(() => {
@@ -26,10 +28,12 @@ const App = () => {
       
       <div className="bg-grid px-3 overflow-hidden flex items-start w-full">
         <Sidebarr/>
-        <div className="w-full h-screen px-3">
+        <div className="w-full relative h-screen px-3 dark:text-white overflow-y-auto max-md:pb-20">
           <Navbar/>
           <Routes>
             <Route path='/' element={<ProctectedRoute><HomePage/></ProctectedRoute>} />
+            <Route path='/profile' element={<ProctectedRoute><ProfilePage/></ProctectedRoute>} />
+            <Route path='/search' element={<ProctectedRoute><Search/></ProctectedRoute>} />
             <Route path='/login' element={<LoginPage/>} />
             <Route path='/signup' element={<SignUpPage/>} />
 

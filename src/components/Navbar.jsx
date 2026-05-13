@@ -83,8 +83,8 @@ const Navbar = () => {
     <>
       <div className=" sticky top-0 left-0 bg-white dark:bg-gray-900 z-20 w-full p-3 px-0 flex justify-between items-center">
         {/* left */}
-         <div className="flex items-center justify-start">
-          <div className="xl:hidden -ml-5">
+         <div className="flex items-center justify-start gap-2">
+          <div className="md:hidden ">
                 <img src="./Sona_Icon.png" alt="sona_icon" className='h-10 w-10 rounded-md' />
             </div>
           <Link to="/search" className=" flex items-center gap-3 p-2 pl-10 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-full">

@@ -10,6 +10,8 @@ import Notify from './components/Notify.jsx'
 import ProctectedRoute from "./components/ProctectedRoute.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import Search from "./pages/Search.jsx"
+import CategoryPage from "./pages/CategoryPage.jsx"
+import ProductDetailsPage from "./pages/ProductDetailsPage.jsx"
 const App = () => {
     const {notifystatus} = useContext(all_provider)
   useEffect(() => {
@@ -34,6 +36,8 @@ const App = () => {
             <Route path='/' element={<ProctectedRoute><HomePage/></ProctectedRoute>} />
             <Route path='/profile' element={<ProctectedRoute><ProfilePage/></ProctectedRoute>} />
             <Route path='/search' element={<ProctectedRoute><Search/></ProctectedRoute>} />
+            <Route path='/category' element={<ProctectedRoute><CategoryPage/></ProctectedRoute>} />
+            <Route path='/details/:id' element={<ProctectedRoute><ProductDetailsPage/></ProctectedRoute>} />
             <Route path='/login' element={<LoginPage/>} />
             <Route path='/signup' element={<SignUpPage/>} />
 

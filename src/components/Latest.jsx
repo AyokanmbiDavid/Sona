@@ -27,10 +27,10 @@ const Latest = () => {
             <h1 className='font-bold'>Latest Supply</h1>
 
             {/* grid supply */}
-            <div className="grid mt-2 grid-cols-5 max-md:grid-cols-3 dark:text-gray-900 max-sm:grid-cols-1 gap-3  overflow-y-auto">
+            <div className="grid mt-2 xl:grid-cols-5 md:grid-cols-3 dark:text-gray-900 max-sm:grid-cols-1 gap-3  overflow-y-auto">
                 {Lat.map((item,e) => (
                     <>
-                    <Card title={item.title} price={item.price} />
+                    <Card title={item.title} price={item.price} id={item.id} />
                     </>
                 ))}
             </div>

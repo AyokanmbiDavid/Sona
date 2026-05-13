@@ -9,7 +9,7 @@ const Sidebarr = () => {
     const navs =[
         {name:'Home',icon:<Home size={13}/>,path:'/'},
         {name:'Categories',icon:<Component size={13}/>,path:'/category'},
-        {name:'Messages',icon:<LucideShoppingCart size={13}/>,path:'/messages'},
+        {name:'Cart',icon:<LucideShoppingCart size={13}/>,path:'/messages'},
         {name:'Updates',icon:<Bell size={13}/>,path:'/updated'},
     ]
 
@@ -52,7 +52,7 @@ const Sidebarr = () => {
             </div>
       </div>
 
-      <div className=" w-full bg-white dark:bg-gray-800 fixed z-20 p-3 bottom-0 right-0 flex items-center justify-around xl:hidden">
+      <div className=" w-full bg-white dark:bg-gray-800 fixed z-20 p-3 bottom-0 right-0 flex items-center justify-around md:hidden">
 
                 {navs.map((item, e) => (
                     <>

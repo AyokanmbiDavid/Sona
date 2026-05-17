@@ -9,7 +9,7 @@ const Sidebarr = () => {
     const navs =[
         {name:'Home',icon:<Home size={13}/>,path:'/'},
         {name:'Categories',icon:<Component size={13}/>,path:'/category'},
-        {name:'Cart',icon:<LucideShoppingCart size={13}/>,path:'/messages'},
+        {name:'Cart',icon:<LucideShoppingCart size={13}/>,path:'/cart'},
         {name:'Updates',icon:<Bell size={13}/>,path:'/updated'},
     ]
 

@@ -10,7 +10,6 @@ const Navbar = () => {
   const [islogin,setislogin] = useState()
   const [theme,settheme] = useState(localStorage.getItem('theme') || 'light')
   const [loading, setloading] = useState(false)
-  const [dropdown,setdropdown]=useState(false);
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -109,13 +108,14 @@ const Navbar = () => {
         <div className="ml-4 relative flex items-center">
          {islogin ? 
          <span className="p-3 cursor-pointer rounded-full dark:text-gray-100 shrink-0" 
-         onClick={() => setdropdown(prev => !prev)}
-         id='dropdownToggle' data-dropdown-trigger="click" data-dropdown-toggle="dropdownMenu">
+         data-dropdown-trigger="click" 
+         data-dropdown-toggle="dropdownMenu">
            <User2Icon size={13}/>
          </span> :
          <></>}
 
-         {dropdown && <div id='dropdownMenu' className="w-50 absolute top-20 flex dark:bg-gray-800 bg-white flex-col items-center right-0 rounded-md g-white border dark:border-gray-700 border-gray-200">
+        <div id='dropdownMenu' 
+        className="w-50 absolute top-20 flex hidden dark:bg-gray-800 bg-white flex-col items-center right-0 rounded-md g-white border dark:border-gray-700 border-gray-200">
           <div className="w-full p-3 border-b border-gray-200 dark:border-gray-700 flex flex-col justify-center items-center gap-3">
             <span className="bg-green-100 dark:bg-green-800 dark:text-gray-200 p-3 rounded-full">
               <User2Icon />
@@ -136,7 +136,8 @@ const Navbar = () => {
               login as Admin  {loading ?<Loader2Icon size={13} className='animate-spin' /> :<LogIn size={13} />}
             </button>
           </div>
-         </div>}
+         </div>
+
         </div>
         </div>
       </div>

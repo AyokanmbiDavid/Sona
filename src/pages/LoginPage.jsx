@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { CloudUpload, DoorOpen, EyeClosed, EyeIcon, Info, Key, Loader, Loader2, LockIcon, ShoppingCart, User } from "lucide-react";
+import { CloudUpload, DoorOpen, Eye, EyeClosed, EyeIcon, Info, Key, Loader, Loader2, LockIcon, ShoppingCart, User } from "lucide-react";
 import axios from "axios";
 import { all_provider } from "../components/ContextProvider";
 import ResetPassword from "../components/ResetPassword";
+import api from "../api/axios";
 // import { ShopContext } from "../components/ContextProvider";
 
 const LoginPage = () => {
     // const [userlog,setuserlog] = useState({email:'',password:'',type:'user'});
     const [loading,setloading] = useState(false);
+    const [showpass,setshowpass] = useState(false)
     const {Notify} = useContext(all_provider)
     const navigate = useNavigate();
     const [showreset,setshowreset] = useState(false)
@@ -21,18 +23,19 @@ const LoginPage = () => {
       const password = formData.get('password');
       const role = e.nativeEvent.submitter.value;
       const staylogged = formData.get('staylogged') == 'on'
-      const endpoint = role === 'user' ? 'http://localhost:3000/api/user/login' :'http://localhost:3000/api/user/login/admin' 
+      const endpoint = role === 'user' ? '/user/login' :'/user/login/admin' 
       setloading (true)
       
       if (password.length < 6 ) {
         Notify('failure','password must be 6 characters long')
       } else {
         try{
-          let res = await axios.post(endpoint ,{email,password});
+          let res = await api.post(endpoint ,{email,password});
           console.log('user login succeas');
           Notify('success','login successful');
 
-            localStorage.setItem('userlog',JSON.stringify({email,password,stayologged: staylogged == 'on' ? true : false}))
+            localStorage.setItem('userlog',JSON.stringify({email,password,staylogged: staylogged == 'on' ? true : false}))
+            localStorage.setItem("token",res.data.token)
 
           setTimeout(() => {
             navigate('/')
@@ -62,12 +65,17 @@ const LoginPage = () => {
               className="bg-gray-100 rounded-md text-xs border dark:text-gray-300 border-gray-200 dark:bg-gray-800 dark:border-gray-700"/>
             </div>
 
-            <div className="flex flex-col gap-2 mt-5">
+            <div className="flex flex-col gap-2 mt-5 relative">
               <label className="text-xs dark:text-gray-300">Password</label>
+              <span
+              onClick={() => setshowpass(!showpass)}
+              className="absolute z-5 top-7 p-2 right-1 cursor-pointer hover:bg-gray-200 rounded-full">
+                {showpass ? <Eye size={13}/> : <EyeClosed size={13}/>}
+              </span>
               <input 
               // onChange={(e) => setuserlog({...userlog,email: e.target.value})} required
               name="password" required
-              type="password" placeholder="........" 
+              type={showpass ? 'text' : "password"} placeholder="........" 
               className="bg-gray-100 rounded-md text-xs dark:text-gray-300 border border-gray-200 dark:bg-gray-800 dark:border-gray-700"/>
             </div>
 

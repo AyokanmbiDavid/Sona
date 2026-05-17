@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { endpoint } from '../components/ContextProvider';
 import axios from 'axios';
 import Card from '../components/Card';
+import api from '../api/axios';
 
 const Search = () => {
     const [searchval,setsearchval] = useState('')
@@ -13,7 +14,7 @@ const Search = () => {
         setloading(true);
         if (searchval) {
             try {
-            let res = await axios.post(`${endpoint}/store/search`,{searchval});
+            let res = await api.post(`${endpoint}/store/search`,{searchval});
             setsearchresult(res.data);
         } catch (e) {
             console.log(e);
@@ -50,10 +51,10 @@ const Search = () => {
 
                 {/* search result */}
                 {searchresult.length  > 0 && 
-                <div className={`grid mt-2 ${!searchval && 'hidden' } grid-cols-5 max-md:grid-cols-3 dark:text-gray-900 max-sm:grid-cols-1 gap-3  overflow-y-auto`}>
+                <div className={`grid mt-2 ${!searchval && 'hidden' } grid-cols-5 max-md:grid-cols-3 dark:text-gray-900 max-sm:grid-cols-2 gap-3  overflow-y-auto`}>
                 {searchresult.map((item,e) => (
                     <>
-                    <Card title={item.title} price={item.price} />
+                    <Card title={item.title} price={item.price} img={item.img} id={item.id} />
                     </>
                 ))}
             </div>}

@@ -12,6 +12,7 @@ import ProfilePage from "./pages/ProfilePage.jsx"
 import Search from "./pages/Search.jsx"
 import CategoryPage from "./pages/CategoryPage.jsx"
 import ProductDetailsPage from "./pages/ProductDetailsPage.jsx"
+import CartPage from "./pages/CartPage.jsx"
 const App = () => {
     const {notifystatus} = useContext(all_provider)
   useEffect(() => {
@@ -38,6 +39,7 @@ const App = () => {
             <Route path='/search' element={<ProctectedRoute><Search/></ProctectedRoute>} />
             <Route path='/category' element={<ProctectedRoute><CategoryPage/></ProctectedRoute>} />
             <Route path='/details/:id' element={<ProctectedRoute><ProductDetailsPage/></ProctectedRoute>} />
+            <Route path='/cart' element={<ProctectedRoute><CartPage/></ProctectedRoute>} />
             <Route path='/login' element={<LoginPage/>} />
             <Route path='/signup' element={<SignUpPage/>} />
 

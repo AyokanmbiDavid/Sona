@@ -2,13 +2,13 @@ import { Plus, ShoppingCart } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Card = ({title,price,id}) => {
+const Card = ({title,price,id,img}) => {
   return (
     <>
         <Link to={`details/${id}`} className="w-full max-sm:place-items-center">
                         {/* image */}
-                        <div className="w-full relative h-70 ">
-                            <img src="" className="w-full h-full bg-gray-100 dark:bg-gray-800 border-0 rounded-lg " loading='true'/>
+                        <div className="w-full relative h-70 max-sm:h-50">
+                            <img src={img} className="w-full h-full bg-gray-100 dark:bg-gray-800 border-0 rounded-lg " loading='true'/>
                             <div className="absolute bottom-2 left-2 font-bold p-2 bg-gray-200/80 text-xs rounded-full">
                                 {title}
                             </div>

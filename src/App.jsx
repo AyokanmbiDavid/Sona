@@ -29,7 +29,7 @@ const App = () => {
        
         <Notify/>
       
-      <div className="bg-grid px-3 overflow-hidden flex items-start w-full">
+      <div className="bg-grid px-3 max-md:px-0 overflow-hidden flex items-start w-full">
         <Sidebarr/>
         <div className="w-full relative h-screen px-3 dark:text-white overflow-y-auto max-md:pb-20">
           <Navbar/>

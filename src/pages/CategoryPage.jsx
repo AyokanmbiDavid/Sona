@@ -1,13 +1,20 @@
 import { ChevronDown, ChevronUp, DotIcon, Gamepad, Glasses, Loader2, LoaderCircleIcon, Smartphone, Utensils } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import api from '../api/axios';
 import Card from '../components/Card';
+import RefreshComp from '../components/RefreshComp';
+import ErrorComp from '../components/ErrorComp';
+import { all_provider } from '../components/ContextProvider';
 
 const CategoryPage = () => {
     const [iscate,setiscate] = useState('utensils');
     const [opencates,setopencates] = useState(false);
     const [catresult,setcatresult] = useState([]);
-    const [loading,setloading] = useState(true)
+    const [loading,setloading] = useState(true)    
+    const [Err,setErr] = useState()   
+    const {Notify} = useContext(all_provider)
+    
+    
     const cates = [
         {name: 'Utensils',icon:<Utensils size={13}/>,set:'utensils'},
         {name: 'Fashion',icon:<Glasses size={13}/>,set:'fashion'},
@@ -17,22 +24,28 @@ const CategoryPage = () => {
 
     ]
 
-    useEffect(() => {
-      async function getCat() {
+     async function getCat() {
       setloading(true);
+      setErr()
 
         try {
             let res = await api.post('/store/category',{item:iscate});
             setcatresult(res.data);
-            console.log(res.data);
-            
         } catch (e) {
-            console.log(e);
+            if (e.response) {
+            setErr(e.response.data.error)
+            Notify('failure',e.response.data.error)
+            } else {
+            Notify('failure','Network error');
+            setErr('Network Error')
+            }
             
         }
         setloading(false)
 
       }
+
+    useEffect(() => {
       getCat()
     }, [iscate])
 
@@ -40,6 +53,7 @@ const CategoryPage = () => {
 
   return (
     <>
+    <RefreshComp func={getCat} loading={loading} />
         <div className="w-full flex max-sm:flex-col">
             {/* category select */}
             <div className="relative">
@@ -109,7 +123,7 @@ const CategoryPage = () => {
                 {/* main result */}
                 {catresult.length > 0 && !loading ?
                 <>
-                    <div className=" grid grid-cols-5 max-md:grid-cols-2 max-sm:mt-15 dark:text-gray-900 max-sm:grid-cols-2 gap-3  overflow-y-auto">
+                    <div className=" grid grid-cols-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-sm:mt-15 dark:text-gray-900 max-sm:grid-cols-2 gap-3  overflow-y-auto">
                         {catresult.map((item,e) => (
                         <>
                             <Card title={item.title} price={item.price} img={item.img} id={item.id}/>
@@ -122,6 +136,12 @@ const CategoryPage = () => {
                 </> }
                 
             </div>
+
+            {/* error */}
+             {!loading && Err == 'Network Error' ? <>
+                <ErrorComp Err={Err} />
+            </> : <>
+            </>}
         </div>
 
     </>

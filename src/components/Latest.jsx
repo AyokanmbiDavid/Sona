@@ -1,22 +1,36 @@
-import { Loader2, Plus, ShoppingCart } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { Loader2, Plus, ShoppingCart, WifiOff, WifiZero, WifiZeroIcon } from 'lucide-react'
+import React, { useContext, useEffect, useState } from 'react'
 import Card from './Card'
 import axios from 'axios';
 import api from '../api/axios';
+import RefreshComp from './RefreshComp';
+import { all_provider } from './ContextProvider';
+import ErrorComp from './ErrorComp';
 
 const Latest = () => {
+    const {Notify} = useContext(all_provider)
     const [Lat,setLat] = useState([]);
     const [loading,setloading] = useState(false);
     const endpoint = '/store/latest'
+    const [Err,setErr] = useState()
 
     const fetchData = async () => {
         setloading(true)
+        setErr();
+
         try{
             let res = await api.get(endpoint);
             setLat(res.data)
         } catch (e){
-            console.log(e)
+            if (e.response) {
+            setErr(e.response.data.error)
+            Notify('failure',e.response.data.error)
+            } else {
+            Notify('failure','Network error');
+            setErr('Network Error')
+            }
         }
+
         setloading(false)
     }
     useEffect(() => {
@@ -25,6 +39,7 @@ const Latest = () => {
     
   return (
     <>
+        <RefreshComp func={fetchData} loading={loading}/>
         <div className="w-full p-2">
             <h1 className='font-bold'>Latest Supply</h1>
 
@@ -45,6 +60,11 @@ const Latest = () => {
                 <div className="w-full h-100 flex justify-center items-center">
                     <Loader2 size={13} className='animate-spin' />
                 </div>
+            </>}
+
+            {!loading && Err ? <>
+                <ErrorComp Err={Err} />
+            </> : <>
             </>}
         </div>
     </>

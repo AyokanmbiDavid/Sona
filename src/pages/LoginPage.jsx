@@ -41,9 +41,12 @@ const LoginPage = () => {
             navigate('/')
           }, 2000);
       } catch (e) {
-        console.log('login failed');
-        console.log(e);
-        Notify('failure','login procedure failed') 
+        console.log(e.response.data.error);
+        if (e.response) {
+          Notify('failure',e.response.data.error)
+        } else {
+        Notify('failure','Network error')
+        }
       }
       }
 

@@ -1,23 +1,36 @@
 import { AlertTriangle, SearchIcon } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
-import { endpoint } from '../components/ContextProvider';
+import React, { useContext, useEffect, useState } from 'react'
+import { all_provider, endpoint } from '../components/ContextProvider';
 import axios from 'axios';
 import Card from '../components/Card';
 import api from '../api/axios';
+import ErrorComp from '../components/ErrorComp';
+import RefreshComp from '../components/RefreshComp';
 
 const Search = () => {
     const [searchval,setsearchval] = useState('')
     const [loading,setloading] = useState(false);
-    const [searchresult,setsearchresult] = useState([])
+    const [searchresult,setsearchresult] = useState([])    
+    const [Err,setErr] = useState()    
+    const {Notify} = useContext(all_provider)
+    
+    
 
     let searchValue = async () => {
         setloading(true);
+        setErr()
         if (searchval) {
             try {
             let res = await api.post(`${endpoint}/store/search`,{searchval});
             setsearchresult(res.data);
         } catch (e) {
-            console.log(e);
+            if (e.response) {
+            setErr(e.response.data.error)
+            Notify('failure',e.response.data.error)
+            } else {
+            Notify('failure','Network error');
+            setErr('Network Error')
+            }
         }
         }
         setloading(false)
@@ -28,7 +41,8 @@ const Search = () => {
 
   return (
     <>
-        <div className="w-full p-2">
+    <RefreshComp func={searchValue} />
+        <div className="w-full max-sm:mt-15 p-2">
             <div className="flex w-full items-center justify-center gap-2">
                 <input type="search" 
                 placeholder='Type here to search'
@@ -68,6 +82,11 @@ const Search = () => {
                     </div>
                 </>}
             </div>
+
+             {!loading && Err ? <>
+                <ErrorComp Err={Err} />
+            </> : <>
+            </>}
         </div>
     </>
   )

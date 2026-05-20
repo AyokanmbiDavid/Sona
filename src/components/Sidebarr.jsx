@@ -27,7 +27,7 @@ const Sidebarr = () => {
         }
     }
   return (
-    <div className='h-screen flex flex-col items-center justify-between '>
+    <div className='h-screen flex flex-col transition-all duration-200 items-center justify-between '>
       <div className=" p-1 pr-3 h-full flex flex-col items-center justify-start max-md:hidden border-r border-gray-200 dark:border-gray-800">
             <div className=" mt-4">
                 <img src="./Sona_Icon.png" alt="sona_icon" className='h-7 w-7 rounded-md' />
@@ -43,7 +43,8 @@ const Sidebarr = () => {
                             {item.icon}
 
                             {ishovered == navs.indexOf(item) &&
-                            <div className="absolute p-2 text-xs z-20 bg-black rounded-xl dark:bg-gray-100 text-white dark:font-bold dark:text-gray-900 -right-25 -top-1">
+                            <div className="absolute p-2 text-xs z-20 bg-black transition-all duration-200
+                            rounded-xl dark:bg-gray-100 text-white dark:font-bold dark:text-gray-900 -right-25 -top-1">
                                 {item.name}
                             </div>}
                         </Link>
@@ -52,7 +53,7 @@ const Sidebarr = () => {
             </div>
       </div>
 
-      <div className=" w-full bg-white dark:bg-gray-800 fixed z-20 p-3 bottom-0 right-0 flex items-center justify-around md:hidden">
+      <div className=" w-full bg-white transition-all duration-200 dark:bg-gray-800 fixed z-20 p-3 bottom-0 right-0 flex items-center justify-around md:hidden">
 
                 {navs.map((item, e) => (
                     <>
@@ -65,7 +66,7 @@ const Sidebarr = () => {
                 ))}
       </div>
 
-      <div className="p-2 mb-10 rounded-full bg-gray-100 cursor-pointer max-md:hidden " onClick={() => toggletheme()}>
+      <div className="p-2 mb-10 rounded-full transition-all duration-200 bg-gray-100 cursor-pointer max-md:hidden " onClick={() => toggletheme()}>
         {theme == 'light' ? 
         <Moon size={13}/> :
         <SunIcon size={13} />}

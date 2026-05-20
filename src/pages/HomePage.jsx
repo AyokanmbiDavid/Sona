@@ -4,6 +4,7 @@ import { all_provider } from '../components/ContextProvider';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Latest from '../components/Latest';
+import RefreshComp from '../components/RefreshComp';
 
 
 const HomePage = () => {

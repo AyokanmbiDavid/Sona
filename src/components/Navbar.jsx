@@ -9,7 +9,7 @@ const Navbar = () => {
   const {refresh,Notify} = useContext(all_provider);
   const [islogin,setislogin] = useState()
   const [theme,settheme] = useState(localStorage.getItem('theme') || 'light')
-  const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -51,9 +51,11 @@ const Navbar = () => {
           navigate('/')
         }, 2000);
       } catch (e) {
-        console.log('login failed');
-        console.log(e);
-        Notify('failure','login procedure failed') 
+        if (e.response) {
+            Notify('failure',e.response.data.error)
+            } else {
+            Notify('failure','Network error')
+            }
       }
       }
 
@@ -80,7 +82,7 @@ const Navbar = () => {
   
   return (
     <>
-      <div className=" sticky top-0 left-0 bg-white dark:bg-gray-900 z-20 w-full p-3 px-0 flex justify-between items-center">
+      <div className=" sticky top-0 left-0 transition-all duration-200 bg-white dark:bg-gray-900 z-20 w-full p-3 px-0 flex justify-between items-center">
         {/* left */}
          <div className="flex items-center justify-start gap-2">
           <div className="md:hidden ">
@@ -93,11 +95,6 @@ const Navbar = () => {
 
         {/* right */}
         <div className="flex items-center gap-2">
-          {/* refresh */}
-          <div className="bg-gray-100 dark:bg-gray-700 cursor-pointer dark:text-gray-200 p-2 rounded-lg">
-              <RefreshCw  size={13}/>
-          </div>
-
           {/* theme toggle */}
           <div className="p-2 ml-5 rounded-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 cursor-pointer xl:hidden" onClick={() => toggletheme()}>
         {theme == 'light' ? 

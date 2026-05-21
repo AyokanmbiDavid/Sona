@@ -56,7 +56,7 @@ const LoginPage = () => {
     <>
       <div className="w-full p-10 flex max-md:flex-col overflow-hidden justify-center items-center h-full pb-40">
         {/* left */}
-        <div className="w-full px-10 max-md:p-0 xl:max-w-xl ">
+        <div className="w-full px-10 max-md:p-0 xl:max-w- ">
           <h1 className="text-2xl dark:text-gray-300 font-bold">Login</h1>
           
           <form onSubmit={handleLogin} className="mt-4">

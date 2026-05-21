@@ -6,6 +6,7 @@ import { all_provider } from '../components/ContextProvider';
 import RefreshComp from '../components/RefreshComp';
 import {motion} from 'framer-motion'
 import ErrorComp from '../components/ErrorComp';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
     const [loading,setloading] = useState(true);
@@ -83,40 +84,48 @@ const CartPage = () => {
 
         {cartresult.length > 0 && !loading ?
         <>
-            <div className="grid max-sm:mt-10 xl:grid-cols-4 md:grid-cols-2 gap-2 max-sm:grid-cols-1">
+            <div className="grid max-sm:mt-10 pb-20 xl:grid-cols-4 md:grid-cols-2 gap-2 max-sm:grid-cols-1">
                 {cartresult.map((item,e) => 
                 <>
                  <motion.div 
                  initial={{y:10,opacity:0.5,scale:0.9}}
                  animate={{y:0,opacity:1,scale:1}}
-                 className="w-full h-50 border p-0.5 relative rounded-lg border-gray-200 dark:border-gray-800">
-                    <img src={item.img || 'https://unsplash.com'} className='w-full h-full rounded-lg' />
+                 className="w-full border p-0.5 relative rounded-xl hover:scale-105 transition-all duration-200
+                  border-gray-200 dark:border-gray-800">
+                    <img src={item.img || 'https://unsplash.com'} className='w-full h-50 border-0 rounded-t-xl' />
 
-                    {/* up */}
-                    <div className="absolute top-2 px-2 w-full flex items-center justify-between">
-                        <span className="p-2 bg-black text-white rounded-full text-xs font-bold">
-                            $ {item.price}
-                        </span>
+                    <div className="p-1">
+                        {/* title and price */}
+                        <div className="flex justify-between items-center w-full">
+                            <span className="text-xs">
+                                {item.title}
+                            </span>
+                            <span className="text-xs font-bold">
+                               $ {item.price}
+                            </span>
+                        </div>
 
-                        <span className="bg-gray-100 p-2 dark:bg-gray-800 rounded-full text-xs">
-                            <span className="font-bold">{item.quantity}</span> in cart
-                        </span>
+                        {/* controls */}
+                        <div className="flex mt-2 justify-between items-center w-full">
+                            <Link to={`/details/${item.cartId}`} className="p-1 text-xs bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                View
+                            </Link>
+
+                            <div className="flex items-center gap-2">
+                                {/* quantity */}
+                                <span className="text-xs font-bold">
+                                    {item.quantity} items
+                                </span>
+
+                                <span
+                                onClick={() => deleteItem(item.id)}
+                                className="p-2 rounded-md bg-red-100 text-red-700 dark:bg-red-500/50 dark:text-red-200 cursor-pointer">
+                                    <Trash size={13}/>
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* down */}
-                    <div className="absolute z-10 flex items-center justify-between bottom-2 w-full px-2">
-                        {/* item name */}
-                    <span className=" text-xs bottom-2 bg-gray-100 dark:bg-gray-800  rounded-full left-2 p-2">
-                        {item.title}
-                    </span>
-
-                    {/* delete item */}
-                    <span
-                    onClick={() => deleteItem(item.id)}
-                    className="p-2 rounded-full cursor-pointer bg-red-100">
-                        <Trash size={13} className='text-red-600' />
-                    </span>
-                    </div>
                  </motion.div>
             </>)}
             </div>
@@ -125,13 +134,14 @@ const CartPage = () => {
 
         {/* checkout  */}
         {total > 0 && totalprod > 1 ?
-        <div className=" max-sm:w-full w-100  max-sm:left-0 right-0  fixed max-sm:bottom-20 bottom-0 flex p-1 justify-center items-center">
-            <button className="flex justify-center shadow-md text-xs items-center w-full gap-2 rounded-lg p-2 bg-green-500 dark:bg-green-700 font-bold text-white">
+        <div className=" w-full  max-sm:left-0 right-0  fixed max-sm:bottom-20 bottom-0 flex p-1 justify-center items-center">
+            <button className="flex justify-center max-sm:w-full w-100 shadow-md text-xs items-center gap-2 rounded-lg p-2 bg-black cursor-pointer
+             dark:bg-white font-bold dark:text-black text-white hover:shadow-2xl">
                     Checkout <TruckElectricIcon size={14} />
-                    <span className="p-2 rounded-full bg-blue-500">
+                    <span className="p-2 rounded-lg bg-blue-500">
                         $ {total} 
                     </span> ordering 
-                    <span className="p-2 px-3 rounded-full bg-blue-500">
+                    <span className="p-2 px-3 rounded-lg bg-blue-500">
                         {totalprod} 
                     </span> product{totalprod > 1 && 's'}
             </button>

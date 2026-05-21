@@ -10,7 +10,7 @@ const Sidebarr = () => {
         {name:'Home',icon:<Home size={13}/>,path:'/'},
         {name:'Categories',icon:<Component size={13}/>,path:'/category'},
         {name:'Cart',icon:<LucideShoppingCart size={13}/>,path:'/cart'},
-        {name:'Updates',icon:<Bell size={13}/>,path:'/updated'},
+        {name:'Notification',icon:<Bell size={13}/>,path:'/notification'},
     ]
 
     useEffect(() => {
@@ -59,8 +59,16 @@ const Sidebarr = () => {
                     <>
                         <Link to={item.path}
                         onMouseLeave={() => setishovered()}
-                        className={`relative p-3 px-4 flex flex-col rounded-md cursor-pointer ${location == item.path ? 'bg-black dark:bg-gray-700 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-200'} `}>
-                            {item.icon}
+                        >
+                            
+                            <div className={`relative p-2 px-3 flex justify-center rounded-full cursor-pointer ${location == item.path ? 'bg-black dark:bg-gray-700 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-200'}`}>
+                                {item.icon}
+                            </div>
+
+                            {location == item.path &&
+                            <span className='text-[12px] text-center font-bold'>
+                                {item.name}    
+                            </span>}
                         </Link>
                     </>
                 ))}

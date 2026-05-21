@@ -1,15 +1,33 @@
 import { MinusIcon, Plus, PlusIcon, ShoppingCart, XIcon } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {motion} from 'framer-motion'
 import { initFlowbite } from 'flowbite'
+import api from '../api/axios'
+import { all_provider } from './ContextProvider'
 
 const Card = ({title,price,id,img}) => {
-  const [quant,setquant] = useState(1)
+  const [quant,setquant] = useState(1);
+  const user = JSON.parse(localStorage.getItem('userlog'));
+  const {Notify} = useContext(all_provider)
 
   useEffect(()=>{
     initFlowbite()
-  })
+  },[]);
+
+  async function AddtoCart () {
+    Notify('loading','getting item to cart')
+    try{
+      let res = api.post(`/cart/${id}`,{email:user.email,quantity:quant});
+      Notify('success','item added to cart')
+    } catch (e) {
+      if (e.response.data.error) {
+        Notify('failure',e.response.data.error)
+      } else {
+      Notify('failure','Network error')
+      }
+    }
+  }
   return (
     <>
         <motion.div
@@ -56,7 +74,7 @@ const Card = ({title,price,id,img}) => {
  {/* show quatity */}
                               <div 
                               id={`dropdownquant${id}`} 
-                              className="hidden flex flex-col  z-10  w-50 max-sm:w-40 bg-white dark:bg-gray-800 rounded-md text-xs p-1 fex-col
+                              className="hidden flex flex-col  z-10 bottom-0  w-50 max-sm:w-40 bg-white dark:bg-gray-800 rounded-md text-xs p-1 fex-col
                               border border-gray-200
                               dark:border-gray-800">
                                   <div className="flex w-full items-center justify-between ">
@@ -72,6 +90,7 @@ const Card = ({title,price,id,img}) => {
                                     dark:bg-gray-600" />
                                     {/* add button */}
                                     <button
+                                    type='button'
                                     onClick={() => setquant(quant+1)}
                                     className="p-2  bg-blue-500 text-white cursor-pointer rounded-lg">
                                       <PlusIcon size={14} />
@@ -79,13 +98,17 @@ const Card = ({title,price,id,img}) => {
 
                                     {/* minus button */}
                                     <button 
+                                    type='button'
                                     onClick={() => setquant(quant > 1 ? quant - 1 : quant) }
                                     className="p-2  bg-red-500 text-white cursor-pointer rounded-lg">
                                       <MinusIcon size={14} />
                                     </button>
                                   </div>
 
-                                  <button className="flex items-center gap-2 text-xs font-bold my-1 rounded-lg justify-center p-2 bg-blue-600 text-white ">
+                                  <button 
+                                  onClick={() => AddtoCart()}
+                                  className="flex items-center gap-2 text-xs font-bold my-1 rounded-lg
+                                   justify-center p-2 bg-blue-600 text-white  cursor-pointer">
                                     Add to Cart <ShoppingCart size={13} />
                                   </button>
                               </div>

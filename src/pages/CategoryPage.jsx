@@ -75,7 +75,7 @@ const CategoryPage = () => {
             </div>
 
                 {/* mobile category select */}
-            <div className="w-full flex fixed top-17 gap-2 z-10 px-3 right-0 sm:hidden justify-between items-start ">
+            <div className="w-full flex fixed top-25 gap-2 z-10 px-3 right-0 sm:hidden justify-between items-start ">
                 <div className=" w-full p-2 border xl:hidden border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 rounded-lg">
                 {cates.map((item,e) => (
                     <>
@@ -123,7 +123,7 @@ const CategoryPage = () => {
                 {/* main result */}
                 {catresult.length > 0 && !loading ?
                 <>
-                    <div className=" grid grid-cols-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-sm:mt-15 dark:text-gray-900 max-sm:grid-cols-2 gap-3  overflow-y-auto">
+                    <div className=" grid grid-cols-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-sm:mt-23 dark:text-gray-900 max-sm:grid-cols-2 gap-3  overflow-y-auto">
                         {catresult.map((item,e) => (
                         <>
                             <Card title={item.title} price={item.price} img={item.img} id={item.id}/>

@@ -1,9 +1,9 @@
 import axios from "axios";
 
-let url1 = "https://staggerbackend.onrender.com";
+let url1 = "https://sona-backend-x0ae.onrender.com/api";
 let url2 = "http://localhost:3000/api"
 const api = axios.create({
-  baseURL: url2,
+  baseURL: url1,
 });
 
 // Add interceptor to include the token in every request

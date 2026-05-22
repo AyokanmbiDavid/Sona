@@ -3,10 +3,9 @@ import axios from "axios";
 
 let url1 = import.meta.env.VITE_BACKEND_URI;
 let url2 = import.meta.env.VITE_LOCAL_URI;
-console.log(url1);
 
 const api = axios.create({
-  baseURL: url2,
+  baseURL: url1,
 });
 
 // Add interceptor to include the token in every request

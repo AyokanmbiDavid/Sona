@@ -36,7 +36,7 @@ const Card = ({title,price,id,img}) => {
           <div className="w-full max-sm:place-items-center border border-gray-200 dark:border-gray-700 transition-all duration-200 rounded-xl">
                         {/* image */}
                         <div className="w-full relative  dark:text-white ">
-                            <img src={img} className="w-full h-60 max-sm:h-50 bg-gray-100 dark:bg-gray-800 border-0 rounded-xl " loading='true'/>
+                            <img src={img} className="w-full h-60 object-cover max-sm:h-50 bg-gray-100 dark:bg-gray-800 border-0 rounded-xl " loading='true'/>
 
                             <div className="relative">
                               <div className="flex justify-between items-center gap-2 p-2">

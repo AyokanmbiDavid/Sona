@@ -81,7 +81,7 @@ const CategoryPage = () => {
                     <>
                         <div
                         onClick={() =>  setiscate(item.set)}
-                        className={`w-full p-2 flex justify-between hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-xs items-center transition-all duration-200 ${iscate == item.set ? 'font-bold bg-gray-100 dark:bg-gray-700':''} ${opencates && iscate != item.set ? 'hidden' : 'flex'}`}>
+                        className={`w-full p-2 flex justify-between hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-xs items-center transition-all duration-200 ${iscate == item.set ? 'font-bold bg-gray-100 dark:bg-gray-700':''} ${!opencates && item.set != iscate   ? 'hidden' : 'flex'}`}>
                             {item.name}
 
                             <span className="">

@@ -60,7 +60,7 @@ const ProductDetailsPage = () => {
             <div className="w-full flex max-md:flex-col gap-2">
                 {/* main image */}
                 <div className="w-6/10 max-md:w-full">
-                    <img src="" alt="" 
+                    <img src={resu?.img} alt="" 
                     className='w-full h-102 bg-gray-100 rounded-lg dark:bg-gray-800'/>
                 </div>
                 {/* other images */}

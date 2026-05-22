@@ -1,9 +1,12 @@
+import { meta } from "@eslint/js";
 import axios from "axios";
 
-let url1 = "https://sona-backend-x0ae.onrender.com/api";
-let url2 = "http://localhost:3000/api"
+let url1 = import.meta.env.VITE_BACKEND_URI;
+let url2 = import.meta.env.VITE_LOCAL_URI;
+console.log(url1);
+
 const api = axios.create({
-  baseURL: url1,
+  baseURL: url2,
 });
 
 // Add interceptor to include the token in every request
